@@ -1,0 +1,5 @@
+<div>
+  <p>This is the {{role}} with topic '{{topic}}' and count {{count}}.</p>
+  <child #ch [ctopic]="topic" (count)="updateCount($event)"></child>
+  <button (click)="ch.incrCount()">Increment my child</button>
+</div>

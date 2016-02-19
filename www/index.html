@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Angular2 Play Time</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="description" content="Learning about Angular 2.0.0 component interplay">
+<meta name="keywords" content="angular2, es5, component, communication">
+<link rel="author" href="https://niczero.github.io">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,300">
+</head>
+
+<body>
+<div class="container">
+  <app>Loading...</app>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.34.4/es6-shim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.6/angular2-polyfills.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.6/Rx.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.6/angular2-all.umd.js"></script>
+
+<script>window.app = {}</script>
+<script src="shared.service.js"></script>
+<script src="child.component.js"></script>
+<script src="parent.component.js"></script>
+<script src="other.component.js"></script>
+<script>
+window.app.App = ng.core
+.Component({
+  selector: 'app',
+  template: `<parent></parent><other></other>`,
+  directives: [window.app.Parent, window.app.Other],
+  encapsulation: ng.core.ViewEncapsulation.Native
+})
+.Class({
+  constructor: function App () {
+    console.clear();
+  }  
+});
+document.addEventListener('DOMContentLoaded', function () {
+//  ng.core.enableProdMode();
+  ng.platform.browser.bootstrap(window.app.App, [window.app.SharedSrv])
+  .catch(function (err) { console.error(err); });
+});
+</script>
+</body>
+</html>
